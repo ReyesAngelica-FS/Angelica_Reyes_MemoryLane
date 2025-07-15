@@ -8,14 +8,19 @@ const IndexPage = ({ data }) => {
             <h2>Welcome to Memory Lane</h2>
             <p>Enjoy some reflections on tech, tools, and what I’m learning.</p>
 
-            {data.allMdx.nodes.map(post => (
-                <article key={post.id}>
-                <h3>
-                    <Link to={`/posts${post.fields.slug}`}>{post.frontmatter.title}</Link>
-                </h3>
-                <p>{post.frontmatter.date}</p>
-                </article>
-            ))}
+            {data.allMdx.nodes.map(post => {
+                const cleanSlug = post.fields.slug.replace(/^\/+/, "")
+                return (
+                    <article key={post.id}>
+                        <h3>
+                            <Link to={`/posts/${cleanSlug}/`}>
+                                {post.frontmatter.title}
+                            </Link>
+                        </h3>
+                        <p>{post.frontmatter.date}</p>
+                    </article>
+                )
+            })}
         </Layout>
     )
 }
@@ -26,11 +31,11 @@ export const query = graphql`
             nodes {
                 id
                 frontmatter {
-                title
-                date(formatString: "MMMM D, YYYY")
+                    title
+                    date(formatString: "MMMM D, YYYY")
                 }
                 fields {
-                slug
+                    slug
                 }
             }
         }

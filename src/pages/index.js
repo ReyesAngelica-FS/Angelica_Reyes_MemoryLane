@@ -11,7 +11,7 @@ const IndexPage = ({ data }) => {
             {data.allMdx.nodes.map(post => (
                 <article key={post.id}>
                 <h3>
-                    <Link to={post.fields.slug}>{post.frontmatter.title}</Link>
+                    <Link to={`/posts${post.fields.slug}`}>{post.frontmatter.title}</Link>
                 </h3>
                 <p>{post.frontmatter.date}</p>
                 </article>

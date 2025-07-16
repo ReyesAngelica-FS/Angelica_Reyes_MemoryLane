@@ -1,7 +1,7 @@
 const path = require("path");
 const { createFilePath } = require("gatsby-source-filesystem");
 
-// Create slug field
+// 1. Add slug field to each MDX node
 exports.onCreateNode = ({ node, actions, getNode }) => {
     const { createNodeField } = actions;
 
@@ -11,15 +11,14 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         createNodeField({
             node,
             name: "slug",
-            value: slug,
+            value: slug, 
         });
     }
 };
 
-// Tell GraphQL about the slug field
+// 2. Add GraphQL schema definition for custom fields
 exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions;
-
     createTypes(`
         type Mdx implements Node {
             fields: MdxFields
@@ -31,17 +30,17 @@ exports.createSchemaCustomization = ({ actions }) => {
     `);
 };
 
-// Create pages using slug
+// 3. Dynamically create pages for each post
 exports.createPages = async ({ graphql, actions, reporter }) => {
     const { createPage } = actions;
 
     const result = await graphql(`
         {
             allMdx {
-                    nodes {
-                        id
-                        internal {
-                            contentFilePath
+                nodes {
+                    id
+                    internal {
+                        contentFilePath
                     }
                     fields {
                         slug
@@ -52,15 +51,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     `);
 
     if (result.errors) {
-        reporter.panic("Error loading MDX results", result.errors);
+        reporter.panic("Error loading MDX nodes", result.errors);
     }
 
-    result.data.allMdx.nodes.forEach(node => {
+    const postTemplate = path.resolve("./src/templates/post.js");
+
+    result.data.allMdx.nodes.forEach((node) => {
         createPage({
-            path: `/posts${node.fields.slug}`,
-            component: `${path.resolve(
-                "./src/templates/post.js"
-            )}?__contentFilePath=${node.internal.contentFilePath}`,
+            path: node.fields.slug, 
+            component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
             context: {
                 id: node.id,
             },

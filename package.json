@@ -5,9 +5,9 @@
   "homepage": "https://reyesangelica-fs.github.io/Angelica_Reyes_MemoryLane",
   "scripts": {
     "develop": "gatsby develop",
-    "build": "gatsby build",
     "clean": "gatsby clean",
-    "deploy": "gatsby build && gh-pages -d public"
+    "build": "gatsby build",
+    "deploy": "npm run clean && npm run build && gh-pages -d public"
   },
   "dependencies": {
     "@mdx-js/react": "^2.3.0",

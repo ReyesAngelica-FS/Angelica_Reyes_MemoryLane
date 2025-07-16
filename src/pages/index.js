@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql, Link, withPrefix } from "gatsby"
 import Layout from "../components/Layout"
 
 const IndexPage = ({ data }) => {
@@ -10,10 +10,11 @@ const IndexPage = ({ data }) => {
 
             {data.allMdx.nodes.map(post => {
                 const cleanSlug = post.fields.slug.replace(/^\/+/, "")
+                const path = withPrefix(`/posts/${cleanSlug}/`)
                 return (
                     <article key={post.id}>
                         <h3>
-                            <Link to={`/posts/${cleanSlug}/`}>
+                            <Link to={path}>
                                 {post.frontmatter.title}
                             </Link>
                         </h3>

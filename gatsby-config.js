@@ -1,38 +1,29 @@
 module.exports = {
-    pathPrefix: "/Angelica_Reyes_MemoryLane", // ✅ Required for GitHub Pages
-    siteMetadata: {
-        title: "Memory Lane",
-        author: "Angelica Reyes",
-        description: "A simple static blog built with Gatsby and React.",
-        siteUrl: "https://reyesangelica-fs.github.io/Angelica_Reyes_MemoryLane", // ✅ Used for SEO
+  pathPrefix: "/Angelica_Reyes_DOW-App", // 👈 Required for GitHub Pages deployment!
+  siteMetadata: {
+    title: "Angelica's Blog",
+    siteUrl: "https://reyesangelica-fs.github.io/Angelica_Reyes_DOW-App",
+  },
+  plugins: [
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "posts",
+        path: `${__dirname}/src/posts`,
+      },
     },
-    plugins: [
-        {
-            resolve: "gatsby-source-filesystem",
-            options: {
-                name: "posts",
-                path: `${__dirname}/src/posts/`, // ✅ Your markdown files
-            },
-        },
-        {
-            resolve: "gatsby-plugin-mdx",
-            options: {
-                extensions: [".mdx", ".md"],
-                gatsbyRemarkPlugins: [
-                    {
-                    resolve: "gatsby-remark-images",
-                        options: {
-                            maxWidth: 800,
-                        },
-                    },
-                ],
-            },
-        },
-        "gatsby-plugin-sharp",
-        "gatsby-transformer-sharp",
-        "gatsby-plugin-image",
-        {
-            resolve: "gatsby-plugin-react-helmet",
-        },
-    ],
-};
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        extensions: [".mdx", ".md"],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-page-creator`,
+      options: {
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    "gatsby-plugin-react-helmet",
+  ],
+}

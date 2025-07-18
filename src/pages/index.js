@@ -1,46 +1,48 @@
 import * as React from "react"
-import { graphql, Link, withPrefix } from "gatsby"
-import Layout from "../components/Layout"
+import { graphql, Link } from "gatsby"
 
 const IndexPage = ({ data }) => {
-    return (
-        <Layout>
-            <h2>Welcome to Memory Lane</h2>
-            <p>Enjoy some reflections on tech, tools, and what I’m learning.</p>
+  const posts = data.allMdx.nodes
 
-            {data.allMdx.nodes.map(post => {
-                const cleanSlug = post.fields.slug.replace(/^\/+/, "")
-                const path = withPrefix(`/posts/${cleanSlug}/`)
-                return (
-                    <article key={post.id}>
-                        <h3>
-                            <Link to={path}>
-                                {post.frontmatter.title}
-                            </Link>
-                        </h3>
-                        <p>{post.frontmatter.date}</p>
-                    </article>
-                )
-            })}
-        </Layout>
-    )
+  return (
+    <main style={{ padding: "2rem", fontFamily: "Arial, sans-serif", maxWidth: "800px", margin: "0 auto" }}>
+      <h1>Welcome to Angelica's Blog 🚀</h1>
+      <p>This is my custom Gatsby site, created as part of my DOW assignment.</p>
+
+      <h2>📚 Latest Posts</h2>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {posts.map(post => (
+          <li key={post.id} style={{ marginBottom: "2rem" }}>
+            <h3 style={{ marginBottom: "0.3rem" }}>
+              <Link to={`/posts${post.fields.slug}`} style={{ textDecoration: "none", color: "#663399" }}>
+                {post.frontmatter.title}
+              </Link>
+            </h3>
+            <p style={{ fontStyle: "italic", color: "#555" }}>{post.frontmatter.date}</p>
+          </li>
+        ))}
+      </ul>
+    </main>
+  )
 }
 
 export const query = graphql`
-    query {
-        allMdx(sort: { frontmatter: { date: DESC } }) {
-            nodes {
-                id
-                frontmatter {
-                    title
-                    date(formatString: "MMMM D, YYYY")
-                }
-                fields {
-                    slug
-                }
-            }
+  query {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
+      nodes {
+        id
+        frontmatter {
+          title
+          date(formatString: "MMMM D, YYYY")
         }
+        fields {
+          slug
+        }
+      }
     }
+  }
 `
 
 export default IndexPage
+
+export const Head = () => <title>DOW App</title>

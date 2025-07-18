@@ -1,24 +1,29 @@
 {
-  "name": "angelica-reyes-memorylane",
+  "name": "angelica-reyes-dow-app",
   "version": "1.0.0",
-  "description": "Memory Lane blog project",
-  "homepage": "https://reyesangelica-fs.github.io/Angelica_Reyes_MemoryLane",
+  "private": true,
+  "description": "angelica-reyes-dow-app",
+  "author": "Angelica Reyes",
+  "homepage": "https://ReyesAngelica-FS.github.io/Angelica_Reyes_DOW-App",
+  "keywords": [
+    "gatsby"
+  ],
   "scripts": {
     "develop": "gatsby develop",
-    "clean": "gatsby clean",
+    "start": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "npm run clean && npm run build && gh-pages -d public"
+    "clean": "gatsby clean",
+    "predeploy": "gatsby build",
+    "deploy": "gh-pages -d public"
   },
   "dependencies": {
+    "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
-    "gatsby": "^5.13.0",
-    "gatsby-plugin-image": "^3.14.0",
+    "gatsby": "^5.14.1",
     "gatsby-plugin-mdx": "^5.14.1",
+    "gatsby-plugin-page-creator": "^5.14.0",
     "gatsby-plugin-react-helmet": "^6.14.0",
-    "gatsby-plugin-sharp": "^5.14.0",
-    "gatsby-remark-images": "^7.14.0",
-    "gatsby-source-filesystem": "^5.13.0",
-    "gatsby-transformer-sharp": "^5.14.0",
+    "gatsby-source-filesystem": "^5.14.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0"

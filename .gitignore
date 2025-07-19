@@ -1,27 +1,24 @@
-# dependencies
-node_modules/
-.pnp/
-.pnp.js
-
-# Gatsby files
-.cache/
-public/
-
-# dotenv environment variables
-.env
-.env.* 
-
-# OS metadata
+# Root-level
 .DS_Store
-
-# Logs
+.env
+*.log
+logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# IDE-specific (optional)
-.vscode/
-.idea/
+# Ignore all node_modules in subfolders
+**/node_modules/
 
-# deployment (if using gh-pages)
-gh-pages/
+# Ignore build output (if generated at root)
+dist/
+build/
+
+# Ignore OS & editor-specific files
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Ignore Mac system files
+Thumbs.db

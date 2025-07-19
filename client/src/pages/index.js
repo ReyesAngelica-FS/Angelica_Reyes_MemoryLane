@@ -1,5 +1,7 @@
+// src/pages/index.js
 import * as React from "react"
 import { graphql, Link } from "gatsby"
+import Projects from "../components/Projects" 
 
 const IndexPage = ({ data }) => {
   const posts = data.allMdx.nodes
@@ -22,6 +24,9 @@ const IndexPage = ({ data }) => {
           </li>
         ))}
       </ul>
+
+      {/* 🧶 Knitting Projects from Express API */}
+      <Projects />
     </main>
   )
 }

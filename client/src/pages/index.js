@@ -1,10 +1,10 @@
 // src/pages/index.js
-import * as React from "react"
-import { graphql, Link } from "gatsby"
-import Projects from "../components/Projects" 
+import * as React from "react";
+import { graphql, Link } from "gatsby";
+import Projects from "../components/Projects";
 
 const IndexPage = ({ data }) => {
-  const posts = data.allMdx.nodes
+  const posts = data.allMdx.nodes;
 
   return (
     <main style={{ padding: "2rem", fontFamily: "Arial, sans-serif", maxWidth: "800px", margin: "0 auto" }}>
@@ -25,11 +25,13 @@ const IndexPage = ({ data }) => {
         ))}
       </ul>
 
-      {/* 🧶 Knitting Projects from Express API */}
+      <hr style={{ margin: "3rem 0" }} />
+
+      <h2>🧶 Knitting Projects</h2>
       <Projects />
     </main>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query {
@@ -46,8 +48,8 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default IndexPage
+export default IndexPage;
 
-export const Head = () => <title>DOW App</title>
+export const Head = () => <title>DOW App</title>;

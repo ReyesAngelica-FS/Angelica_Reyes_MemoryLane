@@ -1,4 +1,4 @@
-// server/models/KnitModels.js
+// server/models/KnitModel.js
 const mongoose = require("mongoose");
 
 const KnittingProjectSchema = new mongoose.Schema({
@@ -14,24 +14,14 @@ const KnittingProjectSchema = new mongoose.Schema({
     },
     pattern_name: {
         type: String,
-        required: false,
+        required: true,
         trim: true,
     },
-    progress: {
-        type: Number,
-        min: 0,
-        max: 100,
-        default: 0
-    },
-    notes: {
-        type: String,
-        trim: true,
-        default: ""
-    },
-    dateStarted: {
+    created_at: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
+// Export model
 module.exports = mongoose.model("KnittingProject", KnittingProjectSchema);

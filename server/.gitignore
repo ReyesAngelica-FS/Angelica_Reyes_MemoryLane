@@ -1,19 +1,26 @@
-# 🛡️ Don't commit sensitive environment variables
-.env
-
-# 📦 Ignore all installed dependencies
+# Node.js dependencies
 node_modules/
 
-# 📂 Ignore log files
+# Logs
+logs
 *.log
-logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# 🔄 OS + Editor-specific junk
+# Environment variables
+.env
+
+# OS-specific
 .DS_Store
-*.swp
-*.swo
-.idea/
+Thumbs.db
+
+# Editor directories and files
 .vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Optional: if you build a frontend in the same folder
+dist/
+build/

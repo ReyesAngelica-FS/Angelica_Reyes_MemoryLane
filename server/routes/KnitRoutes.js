@@ -1,4 +1,3 @@
-// server/routes/KnitRoutes.js
 const express = require("express");
 const router = express.Router();
 const Project = require("../models/KnitModels");
@@ -6,7 +5,7 @@ const Project = require("../models/KnitModels");
 // GET all projects
 router.get("/", async (req, res) => {
     try {
-        const projects = await Project.find();
+        const projects = await Project.find().sort({ created_at: -1 });
         res.status(200).json(projects);
     } catch (err) {
         res.status(500).json({ error: "Failed to fetch projects", details: err.message });
@@ -15,17 +14,17 @@ router.get("/", async (req, res) => {
 
 // GET single project by ID
 router.get("/:id", async (req, res) => {
-        try {
+    try {
         const project = await Project.findById(req.params.id);
         if (!project) {
-            return res.status(404).json({ error: "Project not found" });
+        return res.status(404).json({ error: "Project not found" });
         }
         res.status(200).json(project);
-        } catch (err) {
+    } catch (err) {
         res.status(500).json({ error: "Failed to fetch project", details: err.message });
-        }
-    });
-    
+    }
+});
+
 // POST new project
 router.post("/", async (req, res) => {
     try {
@@ -40,7 +39,10 @@ router.post("/", async (req, res) => {
 // PUT update project by ID
 router.put("/:id", async (req, res) => {
     try {
-        const updated = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updated = await Project.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        });
         if (!updated) {
         return res.status(404).json({ error: "Project not found" });
         }

@@ -1,0 +1,45 @@
+---
+title: "Understanding Authentication Flow in Modern Web Apps"
+date: "2025-07-25"
+slug: "Final Post"
+---
+
+![User Login Flow](../images/security.jpg)
+
+Whether you're building a small app or a large-scale platform, understanding how **authentication flows** work is critical for securing user access.
+
+---
+
+### 🔐 What is an Authentication Flow?
+
+An authentication flow is the process through which a user proves their identity to a system. It typically includes the following steps:
+
+1. **Login Request**: A user enters credentials (like email and password).
+2. **Verification**: The server verifies the credentials (often with hashed passwords).
+3. **Token Generation**: On success, the server issues a token (e.g., a JWT).
+4. **Session Handling**: The client stores this token (often in localStorage or a secure cookie).
+5. **Access Protected Routes**: The client uses the token to make authenticated API calls.
+
+---
+
+### 🔄 Common Flow Variants
+
+- **Session-based Authentication**: Stores user info on the server (cookie + session).
+- **Token-based Authentication**: Uses JWTs for stateless authentication.
+- **OAuth Flow**: Delegates authentication to providers like Google, GitHub, etc.
+
+---
+
+### 🚨 Why It Matters
+
+If authentication isn’t handled securely:
+- User data may be exposed.
+- Attackers could hijack sessions.
+- APIs may be misused.
+
+---
+
+A well-structured authentication flow is essential for protecting your application and building user trust.
+
+---
+

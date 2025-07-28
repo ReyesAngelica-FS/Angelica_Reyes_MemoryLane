@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Project = require("../models/KnitModels");
+const protect = require("../middleware/authMiddleware"); 
 
-// GET all projects
-router.get("/", async (req, res) => {
+// GET all projects - Protected
+router.get("/", protect, async (req, res) => {
     try {
         const projects = await Project.find().sort({ created_at: -1 });
         res.status(200).json(projects);
@@ -12,8 +13,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET single project by ID
-router.get("/:id", async (req, res) => {
+// GET single project by ID - Protected
+router.get("/:id", protect, async (req, res) => {
     try {
         const project = await Project.findById(req.params.id);
         if (!project) {
@@ -25,8 +26,8 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// POST new project
-router.post("/", async (req, res) => {
+// POST new project - Protected
+router.post("/", protect, async (req, res) => {
     try {
         const newProject = new Project(req.body);
         await newProject.save();
@@ -36,8 +37,8 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT update project by ID
-router.put("/:id", async (req, res) => {
+// PUT update project by ID - Protected
+router.put("/:id", protect, async (req, res) => {
     try {
         const updated = await Project.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -52,8 +53,8 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// DELETE project by ID
-router.delete("/:id", async (req, res) => {
+// DELETE project by ID - Protected
+router.delete("/:id", protect, async (req, res) => {
     try {
         const deleted = await Project.findByIdAndDelete(req.params.id);
         if (!deleted) {
